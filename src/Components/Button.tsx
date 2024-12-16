@@ -1,30 +1,38 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+// Button.tsx
+import React from 'react';
+import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 
 interface Props {
-    value: string
-    width: number
-    backgroundColor?: string
+    value: string;
+    width: number;
+    backgroundColor?: string;
+    onPress: () => void;
 }
 
-const Button = ({ value, width, backgroundColor = '#ffff' }: Props) => {
+const Button: React.FC<Props> = ({ value, width, backgroundColor, onPress }) => {
     return (
-        <View>
-            <TouchableOpacity style={[styles.button, { width: width, backgroundColor: backgroundColor }]}>
-                <Text style={{ textAlign: 'center', color: '#38B9FF', fontSize: 30 }}>{value}</Text>
+        <View style={{ width }}>
+            <TouchableOpacity
+                style={[styles.button, { backgroundColor: backgroundColor || '#DDDDDD' }]}
+                onPress={onPress}
+            >
+                <Text style={styles.buttonText}>{value}</Text>
             </TouchableOpacity>
         </View>
-    )
-}
-
-export default Button
+    );
+};
 
 const styles = StyleSheet.create({
     button: {
         height: 80,
-        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 5,
     },
-})
+    buttonText: {
+        fontSize: 24,
+        color: 'black',
+    },
+});
 
+export default Button;
